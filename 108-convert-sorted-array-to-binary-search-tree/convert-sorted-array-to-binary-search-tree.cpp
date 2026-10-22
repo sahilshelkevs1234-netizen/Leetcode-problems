@@ -27,9 +27,7 @@ TreeNode* build (vector<int> nums,int i,int e){
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         int i=0;
         int e=nums.size()-1;
-        if( nums.size()==0){
-            return NULL;
-        }
+     
         return build(nums,i,e);
 
       
