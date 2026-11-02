@@ -9,48 +9,51 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
+    void CreateVector(TreeNode* root, vector<int> & arr){
+        if(root == NULL) return ;
+        CreateVector(root->left, arr);
+        arr.push_back(root->val);
+        CreateVector(root->right, arr);
+    }
+
+    bool solve(vector<int>& stor, int k){
+        int st = 0;
+        int end = stor.size()-1;
+
+        while(st < end){
+            int sum = stor[st] + stor[end];
+
+            if(sum == k){
+                return true;
+            }else if(sum < k){
+                st++;
+            }else{
+                end--;
+            }
+        }
+        return false;
+    }
 public:
-vector<int> istrue(TreeNode* root ,vector<int>& ans){
-   
-    if(root==NULL){
-
-        return ans;
-
-    }
-    istrue( root->left,ans);
-    ans.push_back(root->val);
-    istrue( root->right,ans);
-
-    return ans;
-
-}
     bool findTarget(TreeNode* root, int k) {
-    vector<int> ans;
-    int i=0;
-    ans = istrue( root,ans);
+        vector<int> stor;
+        CreateVector(root, stor);
 
-    int end =ans.size()-1;
+        return solve(stor, k);
 
-    while(i<end){
-      int  mid=ans[i]+ans[end];
-        if(mid>k){
-        
-        end--;
-      
-        }
-         if(mid<k){
-    
-        i++;
-        }
-        if(mid==k){
-            return true;
-        }
-    }
-    return false;
     }
 };
-
 
 
 
