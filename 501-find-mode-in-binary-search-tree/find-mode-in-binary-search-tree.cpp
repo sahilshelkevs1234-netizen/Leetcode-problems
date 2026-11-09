@@ -11,21 +11,21 @@
  */
 class Solution {
     public:
-    void solve(vector<int>& arr, TreeNode* root,unordered_map<int,int>& m){
+    void solve( TreeNode* root,unordered_map<int,int>& m){
         if(root == NULL){
             return ;
         }
         
           m[root->val]++;
-        solve(arr,root->left,m);
-        solve(arr,root->right,m);
+        solve(root->left,m);
+        solve(root->right,m);
 
     }
 
     vector<int> findMode(TreeNode* root) {
         vector<int> arr;
         unordered_map<int,int> m;
-       solve(arr, root,m);
+       solve( root,m);
         int maxi=0;
 
         for(auto it : m){
